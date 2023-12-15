@@ -1,0 +1,24 @@
+.contact h1 {
+    margin-bottom: 10px;
+}
+
+.pharmacy_list {
+    display: grid;
+    grid-template-columns:  repeat(auto-fill, minmax(400px, 1fr));
+    margin-bottom: 20px;
+}
+
+.pharmacy_list p {
+    margin: 0px 10px 5px 0px;
+}
+
+.pharmacy_list p::before {
+    content: "💊";
+    margin-right: 4px;
+    position: relative;
+}
+
+.contact_txt {
+    margin-bottom: 40px;
+}
+

@@ -1,0 +1,5 @@
+.catalog{
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    grid: 5vw;
+}

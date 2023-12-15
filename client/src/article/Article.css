@@ -1,0 +1,32 @@
+.container-articles {
+    display: flex;
+    justify-content: center; /* Добавим этот стиль */
+    margin: 0 auto;
+}
+
+.container-article{
+    height: auto;
+    width: 40vw;
+}
+.article{
+    background: #878A92;
+    padding: 30px;
+    border-radius: 20px;
+    margin: 0px 0px 20px 20px;
+}
+.article h3{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.article span{
+    line-height: 5px;
+}
+
+.container-article img{
+    border-radius: 20px;
+    align-items: center;
+    vertical-align: middle;
+    width: 39vw;
+    height: auto;
+    margin: 0px 0px 20px 20px;
+}
