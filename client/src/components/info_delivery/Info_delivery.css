@@ -1,0 +1,13 @@
+.info_delivery{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+.row_delivery span{
+    margin-bottom: 15px
+}
+.row_delivery p::before {
+    content: "•";
+    margin: 0px 5px;
+    position: relative;
+}

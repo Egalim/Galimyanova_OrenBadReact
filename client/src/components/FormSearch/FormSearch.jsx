@@ -4,7 +4,7 @@ import search from '../../assets/icons/search.svg'
 
 export default function FormSearch() {
     return (
-        <div>
+        <div className='search_container' >
             <form action="#" method="post" class="search">
                 <input type="search" name="#" class="search-field" placeholder="Найти товар" />
 

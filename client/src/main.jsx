@@ -9,6 +9,7 @@ import App from './App/App';
 import Contact from './Contact/Contact';
 import Article from './article/Article';
 import Account from './account/Account';
+import CardProduct from './CardProduct/CardProduct';
 
 const router = createBrowserRouter ([
 {
@@ -26,6 +27,10 @@ const router = createBrowserRouter ([
 {
   path: '/account',
   element: <Account />
+},
+{
+  path: '/card',
+  element: <CardProduct />
 }
 ]);
 

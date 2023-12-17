@@ -1,5 +1,9 @@
 .catalog{
     display: grid;
-    grid-template-columns: 2fr 5fr;
-    grid: 5vw;
+    grid-template-columns: 1fr 5fr;
+    gap: 5vw;
+}
+.catalogCards{
+    display: flex;
+    flex-direction: column;  
 }
