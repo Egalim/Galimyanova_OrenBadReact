@@ -1,10 +1,29 @@
 .search_row{
     display: flex;
     gap: 2vw;
-    vertical-align: middle;
+    align-items: center;
 }
 .main_block_catalog{
     display: grid;
     grid-template-columns: 2fr 3fr;
-    gap: 3vw;
+    gap: 7vw;
 }
+.info_product{
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+}
+.information{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+.block_txt h3{
+    margin-bottom: 5px;
+}
+.bottom-border{
+    text-decoration: underline #7ECA9C;
+    text-underline-offset: 1px;
+    text-decoration-thickness: px;
+    text-underline-position: under;
+  }

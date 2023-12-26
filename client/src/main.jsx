@@ -10,6 +10,7 @@ import Contact from './Contact/Contact';
 import Article from './article/Article';
 import Account from './account/Account';
 import CardProduct from './CardProduct/CardProduct';
+import Registration from './Entry/Registration';
 
 const router = createBrowserRouter ([
 {
@@ -29,8 +30,12 @@ const router = createBrowserRouter ([
   element: <Account />
 },
 {
-  path: '/card',
+  path: '/:id',
   element: <CardProduct />
+},
+{
+  path: '/entry',
+  element: <Registration />
 }
 ]);
 

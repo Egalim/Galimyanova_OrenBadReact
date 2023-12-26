@@ -14,8 +14,8 @@ export default function Card({ img, nameProduct, nameMaker, price }) {
         <div class="row_card_product">
           <div class="name_product">
             <h3 class="lettering_semi_bold">
-              <a class="texturl">{nameProduct}
-              </a>
+              <div class="texturl">{nameProduct}
+              </div>
             </h3>
           </div>
           <h4>{nameMaker}</h4>

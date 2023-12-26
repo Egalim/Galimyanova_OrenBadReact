@@ -3,99 +3,19 @@ import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import './Contact.css'
 import Form from '../components/form/Form'
+import { useEffect, useState } from 'react'
 
 export default function Contact() {
 
-  const pharmacyArr = [{
-    name: 'Аптека Джангильдина 1/1',
-    hours24: '0'
-  },
-  {
-    name: "Аптека 24 Туркестанская 45",
-    hours24: '0'
-  },
-  {
-    name: 'Аптека Карагандинская 102',
-    hours24: '0'
-  },
-  {
-    name: 'Аптека Гагарина 23 литер Е',
-    hours24: '0'
-  },
-  {
-    name: 'Аптека Комсомольская 66',
-    hours24: '0'
-  },
-  {
-    name: 'Аптека Родимцева 20',
-    hours24: '0'
-  },
-  {
-    name: 'Аптека Невельская 24',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт Гагарина 19А',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт Гагарина 11',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт 1 Мая 61',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт М. Жукова 42',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт Заводская 20',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт Ноябрьская 43/2',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт Победы 9',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт Пролетарская 265',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт Центральная 11',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт Победы 140В',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт Химическая 6',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт Салмышская 13',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт Рыбаковская 3',
-    hours24: '0'
-  },
-  {
-    name: 'Аптечный пункт Краснохолм Дзержинского 43',
-    hours24: '0'
-  }]
+  const [array, setArray] = useState([])
+    useEffect(() => {
+        fetch('http://localhost:8080/api/pharmacy')
+            .then(response => response.json())
+            .then(json => setArray(json))
+    }, [])
 
-  const pharmacy24Arr = [{
-    name: 'Аптека 24 Оренбург Туркестанская 45',
-    hours24: '1'
-  }
-  ]
+  const regularPharmacies = array.filter(pharmacy => pharmacy.hours24 !== '1');
+  const pharmacies24 = array.filter(pharmacy => pharmacy.hours24 === '1');
 
   return (
     <div>
@@ -106,25 +26,17 @@ export default function Contact() {
 
             <h1 class="lettering_bold">Аптеки</h1>
             <div class="pharmacy_list">
-              {
-                pharmacyArr.map((e, index) => {
-                  return (
-                    <p>{e.name}</p>
-                  )
-                })
+            {
+            regularPharmacies.map((e) => (
+                <p key={e.id}>{e.namePharmacy}</p>
+              ))
               }
 
             </div>
 
             <h1 class="lettering_bold">Аптеки 24</h1>
             <div class="pharmacy_list">
-              {
-                pharmacy24Arr.map((e, index) => {
-                  return (
-                    <p>{e.name}</p>
-                  )
-                })
-              }
+              <p>Аптека Туркестанская 45</p>
 
             </div>
 

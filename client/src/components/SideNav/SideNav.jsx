@@ -1,51 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './SideNav.css'
 
 export default function SideNav() {
-    const sideNavArr = [{
-        name: 'Аминоскислоты'
-    },
-    {
-        name: 'Для иммуной системы'
-    },
-    {
-        name: 'Для мам'
-    },
-    {
-        name: 'Для детей и подростков'
-    },
-    {
-        name: 'Для работы мозга'
-    },
-    {
-        name: 'Для органов зрения'
-    },
-    {
-        name: 'Для сердца, сосудов и вен'
-    },
-    {
-        name: 'Для кожи, ногтей, волос'
-    },
-    {
-        name: 'Для пищеварения'
-    },
-    {
-        name: 'Для опорно-двигательного аппарата и суставов'
-    },
-    {
-        name: 'Для мочеполовой ситемы'
-    },
-    {
-        name: 'Другие'
-    }]
+    const [array, setArray] = useState([])
+    useEffect(() => {
+        fetch('http://localhost:8080/api/category')
+            .then(response => response.json())
+            .then(json => setArray(json))
+    }, [])
+   
   return (
     <div className='sideNav'>
         {
-            sideNavArr.map((e) => {
+            array.map((e) => {
                 return (
-                    <div class="sidenav_item">
+                    <div class="sidenav_item" key={e.idCategory}>
                             <a href= '#'> 
-                            <p>{e.name}</p>
+                            <p>{e.nameCategory}</p>
                              </a>
                             <hr />
                         </div>

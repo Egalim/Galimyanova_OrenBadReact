@@ -15,6 +15,7 @@ const App = () => {
           <SideNav />
           <div className="catalogCards">
           <FormSearch />
+          <div className="mar-35"></div>
           <Cards />
           </div>
         </div>

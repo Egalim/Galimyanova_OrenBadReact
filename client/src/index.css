@@ -112,3 +112,23 @@ h4{
   margin-bottom: 40px;
   text-align: center;
 }
+.txt_row{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.mar-35{
+  height: 35px;
+}
+
+.price::after {
+    content: "₽";
+    margin-left: 4px;
+    position: relative;
+  }
+
+  .row_counter{
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+  }

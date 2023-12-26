@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import './Cards.css'
 import Card from './Card/Card'
 import img from '../assets/spirulina.png'
+import { useNavigate } from 'react-router-dom';
 
 export default function Cards() {
     //const [Cards, setCards] = useState([])
+    const navigate = useNavigate();
 
     const arrayCards = [
         {
@@ -83,7 +85,14 @@ export default function Cards() {
             <div className="container_cards">
                 {
                     arrayCards.map((e) => {
-                        return <Card key={e.id} nameProduct={e.nameProduct} img={e.img} nameMaker={e.nameMaker} price={e.price} />
+                        
+                        return (
+                            <div onClick={
+                                () => {
+                                    navigate(`/${e.id}`)
+                                }} key={e.id}><Card key={e.id} nameProduct={e.nameProduct} img={e.img} nameMaker={e.nameMaker} price={e.price} />
+                            </div>
+                        )
                     })
                 }
             </div>
