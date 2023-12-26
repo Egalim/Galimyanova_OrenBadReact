@@ -5,11 +5,7 @@ export default function Card({ img, nameProduct, maker, price}) {
 
   return (
       <div class="product_card"
-        // onClick={
-             // () => {
-                 // navigate(`/${e.id}`)
-             // }}
-      >
+ >
 
         <img src={img} alt="product" />
         <div class="row_card_product">

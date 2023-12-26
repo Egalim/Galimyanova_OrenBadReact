@@ -17,15 +17,6 @@ export default function Cards() {
             })
     }, []);
 
-    // const arrayCards = [
-    //     {
-    //         id: '1',
-    //         img: img,
-    //         nameProduct: 'Спирулина ВЭЛ табл.',
-    //         nameMaker: 'В-МИН ООО/ ДИОД ПАО',
-    //         price: '355.00'
-    //     }
-    //]
     return (
 
         <div>
