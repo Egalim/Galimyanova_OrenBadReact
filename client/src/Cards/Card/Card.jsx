@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Card.css'
 
-export default function Card({ img, nameProduct, nameMaker, price }) {
+export default function Card({ img, nameProduct, maker, price}) {
+
   return (
       <div class="product_card"
         // onClick={
@@ -18,7 +19,7 @@ export default function Card({ img, nameProduct, nameMaker, price }) {
               </div>
             </h3>
           </div>
-          <h4>{nameMaker}</h4>
+          <h4>{maker}</h4>
           <h2 class="lettering_bold product_rub">{price}</h2>
           <button type="button" class="card_product_btn">
             <span class="lettering_semi_bold">В корзину</span>

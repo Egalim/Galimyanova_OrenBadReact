@@ -11,6 +11,7 @@ import Article from './article/Article';
 import Account from './account/Account';
 import CardProduct from './CardProduct/CardProduct';
 import Registration from './Entry/Registration';
+import PostImg from './PostImg';
 
 const router = createBrowserRouter ([
 {
@@ -30,8 +31,12 @@ const router = createBrowserRouter ([
   element: <Account />
 },
 {
-  path: '/:id',
+  path: '/:productId',
   element: <CardProduct />
+},
+{
+  path: '/post',
+  element: <PostImg />
 },
 {
   path: '/entry',

@@ -1,5 +1,6 @@
 import { db } from "../db.js";
 import fs from "fs";
+import path from "path";
 
 class OrenBadControllerClass {
     async getCategory(req, res) {
@@ -24,19 +25,19 @@ class OrenBadControllerClass {
         }
     }
 
-    async uploadProduct(req, res) {
+    async postProduct(req, res) {
         try {
-            const { name, description, price } = req.body;
-            const image = req.files ? req.files.image : null;
+            const { nameProduct, price, quantity, maker, category} = req.body;
+            const img = req.files ? req.files.img : null;
 
-            if (!image) {
+            if (!img) {
                 return res.status(400).json({ error: "No image uploaded" });
             }
 
             // Handle the image upload and store the file
-            const imageName = `${Date.now()}_${image.name}`;
-            const imagePath = `path/to/your/image/directory/${imageName}`;
-            image.mv(imagePath, (err) => {
+            const imageName = `${Date.now()}_${img.name}`;
+            const imagePath = `D:/REACT/OrenBadReact/server/img/${imageName}`;
+            img.mv(imagePath, (err) => {
                 if (err) {
                     console.error("Error saving image:", err);
                     return res.status(500).json({ error: "Error saving image" });
@@ -44,8 +45,8 @@ class OrenBadControllerClass {
 
                 // Insert product data into the database
                 db.query(
-                    'INSERT INTO products (name, description, price, image) VALUES ($1, $2, $3, $4) RETURNING *',
-                    [name, description, price, imageName],
+                    'INSERT INTO public."product" ( nameProduct, price, quantity, maker, category, img ) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+                    [ nameProduct, price, quantity, maker, category, imageName],
                     (error, result) => {
                         if (error) {
                             console.error("Error inserting product:", error);
@@ -59,8 +60,38 @@ class OrenBadControllerClass {
                     }
                 );
             });
+
         } catch (error) {
             console.error("Error handling product upload:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
+
+    async getProduct(req, res) {
+        try {
+            console.log("Connecting to the database...");
+            const products = await db.query//('SELECT * FROM public."product"');
+            ('SELECT public."product".*, public."maker"."nameMaker" AS "maker" FROM public."product" LEFT JOIN public."maker" ON public."product"."maker" = public."maker"."idMaker" ');
+            res.status(200).json(products.rows);
+        } catch (error) {
+            console.error("Error fetching products:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
+
+    async getProductId(req, res) {
+        try {
+            const { productId } = req.params;
+            console.log("Connecting to the database...");
+            const product = await db.query('SELECT public."product".*, public."maker"."nameMaker" AS "maker" FROM public."product" LEFT JOIN public."maker" ON public."product"."maker" = public."maker"."idMaker" WHERE product."productId" = $1', [productId]);
+    
+            if (product.rows.length === 0) {
+                return res.status(404).json({ error: "Product not found" });
+            }
+    
+            res.status(200).json(product.rows[0]);
+        } catch (error) {
+            console.error("Error fetching product:", error);
             res.status(500).json({ error: "Internal Server Error" });
         }
     }
