@@ -1,8 +1,9 @@
-import pg from "pg"
-export const db = new pg.Pool({
-    user: "postgres",
-    password: 'root',
-    host: "localhost",
+import postgres from "postgres";
+
+export const sql = postgres({
+    host:"localhost",
     port: 5432,
-    database: "OrenBad"
+    db: "OrenBad",
+    username: "postgres",
+    password:"root"
 })
