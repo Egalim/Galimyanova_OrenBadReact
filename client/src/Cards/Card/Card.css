@@ -63,3 +63,11 @@
     color: #F5F7F7;
     cursor: pointer;
 }
+.texturl {
+    transition: transform 2 ease; /* добавляем переход для свойства transform */
+    display: inline-block;
+  }
+  
+  .texturl:hover {
+    transform: translateX(-50px); /* перемещаем текст на 5px вправо при наведении */
+  }

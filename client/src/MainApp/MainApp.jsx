@@ -6,10 +6,10 @@ import SideNav from '../components/SideNav/SideNav'
 import FormSearch from '../components/FormSearch/FormSearch'
 import Cards from '../Cards/Cards'
 
-const App = () => {
+const MainApp = () => {
   return (
     <div>
-      < Header />
+      <Header />
       <div className="container">
         <div className="content catalog">
           <SideNav />
@@ -25,4 +25,4 @@ const App = () => {
   )
 }
 
-export default App
+export default MainApp

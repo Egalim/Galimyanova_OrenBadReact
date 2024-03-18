@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Counter.css'
 
 export default function Counter() {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
 
     const handleIncrement = () => {
         if (count < 10) {
@@ -11,7 +11,7 @@ export default function Counter() {
     };
 
     const handleDecrement = () => {
-        if (count > 0) {
+        if (count > 1) {
             setCount(count - 1);
         }
     };

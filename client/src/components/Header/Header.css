@@ -3,6 +3,7 @@
     width: 100%;
     background-color: #40394A;
     padding-top: 14px;
+    z-index: 1;
 
 }
 .container{
@@ -25,9 +26,34 @@
 }
 
 .icons{
+  position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
     vertical-align: middle;
     gap: 2vw;
+}
+
+.dropdown-toggle {
+  position: relative; /* Сделать позиционирование для кнопки */
+  display: block;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  color: #F5F7F7;
+  position: absolute;
+  top: 120%; /* Отображать меню под кнопкой */
+  background-color: #40394A;
+  box-shadow: 0 0 10px rgba(20, 20, 20, 0.1);
+  padding: 10px 50px;
+  left: -25px;
+  white-space: nowrap;
+  border-radius: 10px;
+  z-index: 20;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block; /* Отображать меню при наведении на родительский элемент */
 }
