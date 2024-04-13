@@ -13,3 +13,6 @@
 .sidenav_item hr{
     border-bottom: 1px solid #7ECA9C;
 }
+.sidenav_item.active p {
+    color: #7ECA9C;
+}

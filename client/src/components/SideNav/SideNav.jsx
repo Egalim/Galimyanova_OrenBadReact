@@ -1,35 +1,33 @@
-import React, { useEffect, useState } from 'react'
-import './SideNav.css'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import './SideNav.css';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function SideNav() {
     const navigate = useNavigate();
-    const [array, setArray] = useState([])
+    const location = useLocation();
+    const [categories, setCategories] = useState([]);
+
     useEffect(() => {
         fetch('http://localhost:8080/category')
             .then(response => response.json())
-            .then(json => setArray(json))
-    }, [])
-   
-  return (
-    <div className='sideNav'>
-        {
-            array.map((e) => {
-                return (
-                    <div  class="sidenav_item" onClick={
-                        () => {
-                            navigate(`/category/${e.id_cat}`)
-                        }} key={e.id_cat}>
-                            <a> 
-                            <p>{e.name_cat}</p>
-                             </a>
-                            <hr />
-                        </div>
-                )
-            })
-        }
+            .then(data => setCategories(data))
+            .catch(error => console.error('Ошибка при получении данных о категориях:', error));
+    }, []);
 
-    </div>
-  )
+    return (
+        <div className="sideNav">
+            {categories.map(category => (
+                <div
+                    key={category.id_cat}
+                    className={`sidenav_item ${location.pathname === `/category/${category.id_cat}` ? 'active' : ''}`}
+                    onClick={() => navigate(`/category/${category.id_cat}`)}
+                >
+                    <a>
+                        <p>{category.name_cat}</p>
+                    </a>
+                    <hr />
+                </div>
+            ))}
+        </div>
+    );
 }
-

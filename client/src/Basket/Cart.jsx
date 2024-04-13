@@ -1,36 +1,74 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './Basket.css'
 import Counter from '../components/counter/Counter'
 import trash from '../assets/icons/trash.svg'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
-export default function Cart({ image, title, name_maker, pharm, price }) {
-    return (
-        <div className="container_cart ">
-            <img src={image} alt="product" className='cart_img' />
+export default function Cart({ drop_product, id, image, title, name_maker, pharmid, pharm, price, count }) {
+  const { productId } = useParams();
+  const [quantity, setQuantity] = useState([]);
+  const token = useSelector((state) => state.auth.token)
+  const [count1, setCount1] = useState('')
+  const [newPrice, setnewPrice] = useState(price * count)
 
-            <div className="info_cart">
-                <h2 className='lettering_semi_bold'>{title}</h2>
-                <div className="txt_row">
-                    <p className='lettering_semi_bold'>Производитель:</p>
-                    <p>{name_maker}</p>
-                </div>
-                <a href="" className='txt_green'>Посмотреть больше информации о товаре</a>
-                <div className="txt_row" style={{marginTop: "2vh"}}>
-                    <h3 className='lettering_bold'>Аптека:</h3>
-                    <h3 className='lettering_semi_bold'>{pharm}</h3>
-                </div>
+  const handleCounterChange = (count, price) => {
+    setCount1(count); 
+    setnewPrice(count * price)
+    fetch(`http://localhost:8080/update_quantity`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+        product_id: id,
+        new_quantity: count, // Новое количество товара
+      }),
+    })
+    .then((response) => response.json())
+    .catch((error) => console.error("Error updating quantity:", error));
+  };
 
-                <div className="row_counter">
-                    <Counter />
-                    <h2 className='lettering_bold price'>{price}</h2>
-                </div>
-            </div>
+  useEffect(() => {
+    if (id) {
+      fetch(`http://localhost:8080/products/${id}/${pharmid}/quantity`)
+        .then(response => response.json())
+        .then(data => {
+          setQuantity(data); // Установка данных в состояние
+        })
+        .catch(error => console.error('Error getting pharmacies:', error));
+    }
+  }, [productId])
 
-            <button>
-                <img src={trash} alt="delete" className='delete_img'/>
-            </button>
 
+  return (
+    <div className="container_cart ">
+      <img src={'http://localhost:8080/' + image} alt="product" className='cart_img' />
+
+      <div className="info_cart">
+        <h2 className='lettering_semi_bold'>{title}</h2>
+        <div className="txt_row">
+          <p className='lettering_semi_bold'>Производитель:</p>
+          <p>{name_maker}</p>
         </div>
-    )
+        <a href="" className='txt_green'>Посмотреть больше информации о товаре</a>
+        <div className="txt_row" style={{ marginTop: "2vh" }}>
+          <h3 className='lettering_bold'>Аптека:</h3>
+          <h3 className='lettering_semi_bold'>{pharm}</h3>
+        </div>
+
+        <div className="row_counter" style={{ marginTop: "2vh" }}>
+          <Counter number={count} quantity={quantity.quantity} onCounterChange={handleCounterChange} price={price}/>
+          <h2 className='lettering_bold price'>{newPrice}</h2>
+        </div>
+      </div>
+
+      <button onClick={() => drop_product(id)}>
+        <img src={trash} alt="delete" className='delete_img' />
+      </button>
+
+    </div>
+  )
 }
 

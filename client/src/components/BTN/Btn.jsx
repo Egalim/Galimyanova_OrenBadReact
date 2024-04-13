@@ -3,7 +3,7 @@ import './Btn.css'
 
 export default function Btn({name_btn}) {
   return (
-    <button className='button'><h3 className='lettering_semi_bold'>{name_btn}</h3></button>
+    <button className='my_button'><h3 className='lettering_semi_bold'>{name_btn}</h3></button>
   )
 }
 

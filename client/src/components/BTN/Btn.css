@@ -1,10 +1,10 @@
-.button {
+.my_button {
     border-radius: 12px;
     background: #7ECA9C;
     padding: 15px 45px;
 }
 
-.button:hover {
+.my_button:hover {
     background: #878A92;
     transition: 0.8s;
     color: #F5F7F7;

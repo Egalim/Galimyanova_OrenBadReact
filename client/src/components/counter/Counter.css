@@ -6,3 +6,8 @@
     padding: 0 15px;
     border-radius: 5px;
 }
+.error-label {
+max-width: 100px;
+font-size: 12px;
+color: #CA7E7E;
+}

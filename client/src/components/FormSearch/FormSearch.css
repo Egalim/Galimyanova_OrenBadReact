@@ -7,7 +7,6 @@
     border-radius: 20px;
     padding: 0px 30px;
     justify-content: space-between;
-    
 
 }
 
@@ -19,7 +18,7 @@
     background: none;
 }
 .search-field {
-    width: 500px;
+    min-width: 90%;
     border: 0;
     background: none;
     font-weight: 400;

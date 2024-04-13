@@ -98,6 +98,7 @@ input.input-at:focus {
     outline: none;
     border: none;
     cursor: pointer;
+    margin-top: 2vh;
 }
 
 .form-at-btn:hover {

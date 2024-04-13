@@ -78,4 +78,5 @@ export const authThunk = createAsyncThunk('authThunk', async (data, { rejectWith
 
 export const { logOut } = authSlice.actions
 
+
 export default authSlice.reducer

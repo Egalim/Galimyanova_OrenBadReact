@@ -9,7 +9,7 @@ import Basket from './Basket/Basket';
 import MainApp from './MainApp/MainApp';
 import Auth from './Entry/Auth';
 import Reg from './Entry/Registration';
-import CardsCat from './Cards/CardsCat';
+import CardCat from './Cards/CardCat';
 import AddProduct from './AddProduct/AddProduct';
 
 const router = createBrowserRouter([
@@ -30,12 +30,12 @@ const router = createBrowserRouter([
         element: <Article />
       },
       {
-        path: '/:productId',
+        path: '/product/:productId',
         element: <CardProduct />
       },
       {
         path: 'category/:categoryId',
-        element: <CardsCat />
+        element: <CardCat />
       },
       {
         path: '/auth',
@@ -48,7 +48,11 @@ const router = createBrowserRouter([
       {
         path: '*',
         element: <Navigate to="/" />
-      }
+      },
+      // {
+      //   path: '/basket',
+      //   element: <Basket />
+      // },
     ]
   }
 ])
@@ -79,12 +83,12 @@ const authRouter = createBrowserRouter([
         element: <Article />
       },
       {
-        path: '/:productId',
+        path: '/product/:productId',
         element: <CardProduct />
       },
       {
         path: 'category/:categoryId',
-        element: <CardsCat />
+        element: <CardCat />
       },
       {
         path: '/auth',

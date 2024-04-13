@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import './Card.css'
+import { Link } from 'react-router-dom'
+import Navigate from '../../components/navigation/Navigate'
 
 export default function Card({ img, nameProduct, maker, price}) {
 
   return (
-      <div class="product_card"
- >
+      <div class="product_card">
+        
 
         <img src={`http://localhost:8080/` + `${img}`} alt="product" />
         <div class="row_card_product">

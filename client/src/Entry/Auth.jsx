@@ -1,19 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { authThunk } from '../redux/authSlice.js'
 import { Link } from 'react-router-dom';
 import Header from '../components/Header/Header.jsx';
 import '../components/form/Form.css'
+import { useNavigate } from 'react-router-dom';
 
 export default function Auth() {
     const [password, setPassword] = useState('')
     const [tel, setTel] = useState('')
+    const [redirect, setRedirect] = useState(false);
+
+    const navigate = useNavigate()
 
     const authState = useSelector((state) => state.auth)
+    const token = useSelector((state) => state.auth.token)
     const dispatch = useDispatch()
 
     const path = useLocation()
+
+    useEffect(() => {
+        if (redirect && token) {
+            const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/';
+            if (lastVisitedPage) {
+              localStorage.removeItem('lastVisitedPage');
+              navigate(lastVisitedPage);
+            } else {
+              navigate('/');
+            }
+        }
+    }, [redirect, navigate, token]);
+
+
 
     return (
         authState.loading ? <p>Loading...</p> :
@@ -56,10 +75,15 @@ export default function Auth() {
                                 dispatch(authThunk({
                                     tel: tel,
                                     password: password
-                                }))
+                                })).then(() => {
+                                    setRedirect(true);
+                                });
+                                
                             }}>Войти</button><br></br>
                             <Link to={'/reg'}
-                                className={path == "/reg" ? "location" : '' }><p style={{ marginTop: "1vh", color: "#F5F7F7" }}>Регистрация</p></Link>
+                                className={path == "/reg" ? "location" : '' }>
+                                    <p style={{ marginTop: "2vh", color: "#F5F7F7" }}>Регистрация</p>
+                            </Link>
 
                         </form>
                         {

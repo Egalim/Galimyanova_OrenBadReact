@@ -7,8 +7,11 @@ import img2 from '../assets/article/art2.jpeg'
 import img3 from '../assets/article/art3.jpg'
 import img4 from '../assets/article/art4.jpg'
 import img5 from '../assets/article/art5.jpg'
+import { useLocation } from 'react-router-dom'
 
 export default function Article() {
+    const location = useLocation();
+    localStorage.setItem('lastVisitedPage', location.pathname);
 //     const articleArr =[{
 //         img: img1,
 //         articleHeader: 'Польза БАДов',

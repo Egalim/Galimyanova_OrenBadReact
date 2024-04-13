@@ -132,3 +132,21 @@ h4{
     gap: 1vw;
     align-items: center;
   }
+  .column{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+  }
+
+  .my_button {
+    border-radius: 12px;
+    background: #7ECA9C;
+    padding: 15px 45px;
+}
+
+.my_button:hover {
+    background: #878A92;
+    transition: 0.8s;
+    color: #F5F7F7;
+    cursor: pointer;
+}

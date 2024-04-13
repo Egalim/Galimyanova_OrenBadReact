@@ -2,20 +2,33 @@ import React, { useState } from 'react'
 import './Header.css'
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import { logOut } from '../../redux/authSlice'
 import logo from '../../assets/icons/logo.svg'
 import user from '../../assets/icons/user.svg'
 import cart from '../../assets/icons/cart.svg'
 import { useSelector } from 'react-redux';
+import { RiCloseFill } from "react-icons/ri";
 
 export default function Header() {
+    
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     const token = useSelector((state) => state.auth.token)
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [isOpen, setIsOpen] = useState(false);
-
     const [timerId, setTimerId] = useState(null);
+
+
+    const handleCartClick = () => {
+        if (!token) {
+            setIsModalOpen(true);
+        } else {
+            navigate("/basket");
+        }
+    };
+
 
     const handleMouseEnter = () => {
         setIsOpen(true);
@@ -48,7 +61,9 @@ export default function Header() {
                 </ul>
 
                 <div className="icons">
-                    <Link to="/basket"><img src={cart} /></Link>
+                    <button onClick={handleCartClick}>
+                        <img src={cart} alt="Cart" />
+                    </button>
 
                     <div className="dropdown">
                         <button className="dropdown-toggle" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
@@ -73,7 +88,19 @@ export default function Header() {
                     </div>
                 </div>
             </div>
-        </div>
+
+            {!token && isModalOpen && (
+                <div className="modal_container">
+                    <div className="modal">
+                        <button className='close_btn' onClick={() => setIsModalOpen(false)}>
+                        <RiCloseFill className='close'/>
+                        </button>
+                        <h2 className='txt_white lettering_semi_bold'>Для доступа к корзине необходимо авторизоваться</h2>
+                        <button className='my_button' onClick={() => { navigate('/auth') }}> <h3 className='lettering_semi_bold'>Перейти к авторизации</h3></button>
+                    </div>
+                </div>
+            )}
+        </div >
     )
 }
 
