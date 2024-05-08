@@ -73,7 +73,7 @@ export default function Form() {
                 />
                 <label htmlFor="checkbox-at">
                   Настоящим подтверждаю, что я ознакомлен и согласен с{' '}
-                  <a href="#rules">пользовательским соглашением</a>
+                  <a href="#rules" style={{borderBottom: '1px solid'}}>пользовательским соглашением</a>
                 </label>
                 <input type="hidden" name="subject" value="Тема формы" />
                 <button

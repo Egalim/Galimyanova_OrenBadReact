@@ -18,7 +18,7 @@
     width: 70vw;
     margin: auto;
     display: grid;
-    grid-template-columns: 2fr 3fr 1fr;
+    grid-template-columns: 2fr 3fr 0.5fr;
     gap: 2vw;
 }
 
@@ -37,4 +37,22 @@
     position: absolute;
     top: 20px;
     right: 5vw;
+}
+.container_basket{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    vertical-align: baseline;
+}
+.container_price{
+    box-shadow: 0 0 40px 0 rgba(181, 181, 181, 0.25);
+    background: #f5f7f7;
+    border-radius: 20px;
+    padding: 20px 2vw;
+    max-width: 30vw;
+    min-width: 20vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    align-items: center;
 }

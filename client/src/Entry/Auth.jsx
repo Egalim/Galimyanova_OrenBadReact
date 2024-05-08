@@ -24,10 +24,10 @@ export default function Auth() {
         if (redirect && token) {
             const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/';
             if (lastVisitedPage) {
-              localStorage.removeItem('lastVisitedPage');
-              navigate(lastVisitedPage);
+                localStorage.removeItem('lastVisitedPage');
+                navigate(lastVisitedPage);
             } else {
-              navigate('/');
+                navigate('/');
             }
         }
     }, [redirect, navigate, token]);
@@ -43,9 +43,9 @@ export default function Auth() {
                     <div className="content">
 
                         <form className='form-at'>
-                            <h1 className='lettering_semi_bold txt_white' style={{ marginBottom: "5vh"}}>Авторизация</h1>
+                            <h1 className='lettering_semi_bold txt_white' style={{ marginBottom: "5vh" }}>Авторизация</h1>
                             <div className="form-content">
-                                <div className="validate-input-at " data-validate="Обязательное поле">
+                                <div className="validate-input-at" data-validate="Обязательное поле">
                                     <input className="input-at"
                                         placeholder="Введите номер телефона:"
                                         type="tel"
@@ -57,7 +57,7 @@ export default function Auth() {
                                     />
                                     <span className="focus-input-at"></span>
                                 </div>
-                                <div className="validate-input-at " data-validate="Обязательное поле">
+                                <div className="validate-input-at" data-validate="Обязательное поле">
                                     <input className="input-at"
                                         placeholder="Введите пароль:"
                                         type="password"
@@ -72,23 +72,25 @@ export default function Auth() {
                             </div>
 
                             <button className='form-at-btn lettering_semi_bold' type="submit" onClick={() => {
-                                dispatch(authThunk({
-                                    tel: tel,
-                                    password: password
-                                })).then(() => {
-                                    setRedirect(true);
-                                });
-                                
+                                if (!redirect) {
+                                    dispatch(authThunk({
+                                        tel: tel,
+                                        password: password
+                                    })).then(() => {
+                                        setRedirect(true);
+                                    });
+                                }
                             }}>Войти</button><br></br>
+                            {
+                                authState.error ? <p style={{color: '#CA7E7E', marginTop: '1vh'}}>{authState.error}</p> : <></>
+                            }
                             <Link to={'/reg'}
-                                className={path == "/reg" ? "location" : '' }>
-                                    <p style={{ marginTop: "2vh", color: "#F5F7F7" }}>Регистрация</p>
+                                className={path == "/reg" ? "location" : ''}>
+                                <p style={{ marginTop: "2vh", color: "#F5F7F7" }}>Регистрация</p>
                             </Link>
 
                         </form>
-                        {
-                            authState.error ? <p>{authState.error}</p> : <></>
-                        }
+
                     </div>
                 </div>
             </>

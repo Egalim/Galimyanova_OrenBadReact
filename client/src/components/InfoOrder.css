@@ -1,0 +1,17 @@
+.content_order{
+    display: flex;
+    flex-direction: column;
+    gap: 10vh;
+}
+.head_order {
+    display: flex;
+    justify-content: center;
+}
+.container_cards_order{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) ;
+    gap: 1vw;
+}
+.row_header{
+    width: 100%;
+}

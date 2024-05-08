@@ -39,7 +39,7 @@ export default function Header() {
         // Устанавливаем таймер для закрытия списка через 300 миллисекунд (0.3 секунды)
         const id = setTimeout(() => {
             setIsOpen(false);
-        }, 700);
+        }, 1000);
         setTimerId(id);
     };
 

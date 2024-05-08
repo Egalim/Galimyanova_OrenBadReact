@@ -36,8 +36,6 @@ export const regSlice = createSlice({
 })
 
 export const regThunk = createAsyncThunk('regThunk', async (data, { rejectWithValue }) => {
-    // const { nick, phone, password } = data
-
     try {
         const result = await fetch('http://localhost:8080/reg', {
             method: 'POST',

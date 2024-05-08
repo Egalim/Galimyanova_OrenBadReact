@@ -5,7 +5,7 @@
   display: revert;
 }
 
-a:hover {
+a:hover, button:hover {
   cursor: pointer;
   color: #7ECA9C;
 }
@@ -115,7 +115,7 @@ h4{
 .txt_row{
   display: flex;
   gap: 5px;
-  align-items: center;
+  align-items:baseline;
 }
 .mar-35{
   height: 50px;

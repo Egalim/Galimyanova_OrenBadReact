@@ -1,0 +1,81 @@
+.order {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info_order,
+.container_head,
+.container_orders,
+.container_order {
+    display: flex;
+    flex-direction: column;
+}
+
+.container_head {
+    gap: 0.5vh;
+    align-items: center;
+
+}
+
+.container_orders {
+    margin-top: 50px;
+    gap: 5vh;
+    align-items: center;
+}
+
+.container_order {
+    background: #40394a;
+    border-radius: 20px;
+    width: 70vw;
+    padding: 30px 5vw;
+    gap: 5vh;
+}
+
+.header_pharm_order {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info_order {
+    gap: 2vh;
+}
+
+.row_btns button{
+    border-radius: 12px;
+    padding: 10px 45px;
+}
+.row_btns{
+    display: flex;
+    justify-content: space-between;
+}
+.row_btn{
+    display: flex;
+    gap: 1vw;
+}
+.btn_green {
+    background: #7ECA9C;
+    color: #40394a;
+}
+.btn_green:hover {
+    background: #878A92;
+    transition: 0.8s;
+    color: #F5F7F7;
+}
+.btn_grey:hover {
+    background: #5c5e64;
+    transition: 0.8s;
+    color: #F5F7F7;
+}
+.btn_grey{
+    background-color: #878A92;
+}
+.btn_purple{
+    background-color: #9C7ECA;
+    color: #40394a;
+}
+.btn_purple:hover{
+    background-color: #775ba1;
+    transition: 0.8s;
+    color: #F5F7F7;
+}

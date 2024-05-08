@@ -41,7 +41,13 @@ export default function Contact() {
 
             </div>
 
-
+              <div>
+              <div style={{position:"relative", overflow:"hidden"}}><a href="https://yandex.ru/maps/48/orenburg/search/%D0%B0%D0%BF%D1%82%D0%B5%D0%BA%D0%B8%20%D0%B3%D0%B0%D1%83%D0%B7%20%D0%BE%D0%B0%D1%81/?utm_medium=mapframe&utm_source=maps"
+               style={{color:"#eee", fontSize:"14px", position:"absolute", top:"0px"}}>аптеки гауз оас в Оренбурге</a><a href="https://yandex.ru/maps/48/orenburg/?utm_medium=mapframe&utm_source=maps"
+               style={{color:"#eee", fontSize:"14px", position:"absolute",top:"14px"}}>Оренбург</a>
+               <iframe src="https://yandex.ru/map-widget/v1/?ll=55.093349%2C51.776388&mode=search&sll=55.036630%2C51.788690&sspn=0.109177%2C0.062065&text=%D0%B0%D0%BF%D1%82%D0%BA%D0%B8%20%D0%B3%D0%B0%D1%83%D0%B7%20%D0%BE%D0%B0%D1%81&z=11" 
+               width="100%" height="600" frameborder="1" allowfullscreen="true" style={{position:"relative"}}></iframe></div>
+              </div>
 
             <div className="contact_txt">
               <h1 className="lettering_semi_bold">Центральный офис</h1>

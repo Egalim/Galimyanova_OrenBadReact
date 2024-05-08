@@ -11,6 +11,10 @@ import Auth from './Entry/Auth';
 import Reg from './Entry/Registration';
 import CardCat from './Cards/CardCat';
 import AddProduct from './AddProduct/AddProduct';
+import InfoOrder from './account/Order/InfoOrder';
+import Search from './Cards/Search';
+import Pharm from './acoountPharm/Pharm';
+import PharmOrder from './acoountPharm/order/PharmOrder';
 
 const router = createBrowserRouter([
   {
@@ -46,13 +50,13 @@ const router = createBrowserRouter([
         element: <Reg />
       },
       {
+        path: '/search',
+        element: <Search />
+      },
+      {
         path: '*',
         element: <Navigate to="/" />
       },
-      // {
-      //   path: '/basket',
-      //   element: <Basket />
-      // },
     ]
   }
 ])
@@ -67,8 +71,16 @@ const authRouter = createBrowserRouter([
         element: <MainApp />
       },
       {
+        path: '/search',
+        element: <Search />
+      },
+      {
         path: '/account',
         element: <Account />
+      },
+      {
+        path: '/order/:id',
+        element: <InfoOrder />
       },
       {
         path: '/basket',
@@ -111,26 +123,38 @@ const authRouterPharm = createBrowserRouter([
     path: '/',
     element: <Outlet />,
     children: [
-    ]
-  }
-])
-
-const authRouterAdmin = createBrowserRouter([
-  {
-    path: '/',
-    element: <Outlet />,
-    children: [
       {
-        path: '/addNewProduct',
-        element: <AddProduct />
+        path: '/',
+        element: <Pharm />
+      },
+      {
+        path: '/PharmOrder/:id',
+        element: <PharmOrder />
       },
       {
         path: '*',
-        element: <Navigate to="/addNewProduct" />
+        element: <Navigate to='/' />
       }
     ]
   }
 ])
+
+// const authRouterAdmin = createBrowserRouter([
+//   {
+//     path: '/',
+//     element: <Outlet />,
+//     children: [
+//       {
+//         path: '/addNewProduct',
+//         element: <AddProduct />
+//       },
+//       {
+//         path: '*',
+//         element: <Navigate to="/addNewProduct" />
+//       }
+//     ]
+//   }
+// ])
 
 function App() {
   const token = useSelector((state) => state.auth.token)
@@ -141,8 +165,6 @@ function App() {
 
   return (
     token ?
-    role == 3 ?
-        <RouterProvider router={authRouterAdmin} /> :
         role == 1 ?
         <RouterProvider router={authRouter} /> :
         <RouterProvider router={authRouterPharm} /> :

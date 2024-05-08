@@ -5,7 +5,7 @@ import trash from '../assets/icons/trash.svg'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-export default function Cart({ drop_product, id, image, title, name_maker, pharmid, pharm, price, count }) {
+export default function Cart({ drop_product, id, image, title, name_maker, pharmid, pharm, price, count, onQuantityChange }) {
   const { productId } = useParams();
   const [quantity, setQuantity] = useState([]);
   const token = useSelector((state) => state.auth.token)
@@ -13,7 +13,7 @@ export default function Cart({ drop_product, id, image, title, name_maker, pharm
   const [newPrice, setnewPrice] = useState(price * count)
 
   const handleCounterChange = (count, price) => {
-    setCount1(count); 
+    setCount1(count);
     setnewPrice(count * price)
     fetch(`http://localhost:8080/update_quantity`, {
       method: "POST",
@@ -23,11 +23,14 @@ export default function Cart({ drop_product, id, image, title, name_maker, pharm
       body: JSON.stringify({
         token: token,
         product_id: id,
-        new_quantity: count, // Новое количество товара
+        new_quantity: count, 
       }),
     })
-    .then((response) => response.json())
-    .catch((error) => console.error("Error updating quantity:", error));
+      .then((response) => response.json())
+      .then(() => {
+        onQuantityChange(id, count); 
+      })
+      .catch((error) => console.error("Error updating quantity:", error));
   };
 
   useEffect(() => {
@@ -35,7 +38,7 @@ export default function Cart({ drop_product, id, image, title, name_maker, pharm
       fetch(`http://localhost:8080/products/${id}/${pharmid}/quantity`)
         .then(response => response.json())
         .then(data => {
-          setQuantity(data); // Установка данных в состояние
+          setQuantity(data);
         })
         .catch(error => console.error('Error getting pharmacies:', error));
     }
@@ -52,14 +55,14 @@ export default function Cart({ drop_product, id, image, title, name_maker, pharm
           <p className='lettering_semi_bold'>Производитель:</p>
           <p>{name_maker}</p>
         </div>
-        <a href="" className='txt_green'>Посмотреть больше информации о товаре</a>
+        <a href="https://www.rlsnet.ru/" className='txt_green'>Посмотреть больше информации о товаре</a>
         <div className="txt_row" style={{ marginTop: "2vh" }}>
           <h3 className='lettering_bold'>Аптека:</h3>
           <h3 className='lettering_semi_bold'>{pharm}</h3>
         </div>
 
         <div className="row_counter" style={{ marginTop: "2vh" }}>
-          <Counter number={count} quantity={quantity.quantity} onCounterChange={handleCounterChange} price={price}/>
+          <Counter number={count} quantity={quantity.quantity} onCounterChange={handleCounterChange} price={price} />
           <h2 className='lettering_bold price'>{newPrice}</h2>
         </div>
       </div>
@@ -71,4 +74,3 @@ export default function Cart({ drop_product, id, image, title, name_maker, pharm
     </div>
   )
 }
-

@@ -18,7 +18,7 @@ export const reg = async (req, res) => {
             console.log('user:', user); // Добавим этот console.log для отладки
             
             // Получаем id нового пользователя
-            const userId = user.id;
+            const userId = user[0].id;
             console.log('userId:', userId); // Добавим этот console.log для отладки
 
             // Добавляем запись в таблицу Basket

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Dropdown.css';
 import Counter from '../counter/Counter';
 import { useSelector } from 'react-redux'
 import { RiCloseFill } from "react-icons/ri";
-import { useParams, redirect, useNavigate  } from 'react-router-dom';
+import { useParams, redirect, useNavigate } from 'react-router-dom';
 
 
 export default function Dropdown({ pharmacies, productCount }) {
@@ -11,6 +11,8 @@ export default function Dropdown({ pharmacies, productCount }) {
   const [quantity, setquantity] = useState(null)
   let navigate = useNavigate();
   const [count, setCount] = useState(1);
+  const [ArrayBasket, setArrayBasket] = useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const token = useSelector((state) => state.auth.token)
   const [ModalOpen, setModalOpen] = useState(false)
@@ -22,31 +24,52 @@ export default function Dropdown({ pharmacies, productCount }) {
 
   const handleCartClick = async (pharm, product_id, token_user) => {
     if (!token) {
-      setModalOpen(true)
+      setModalOpen(true);
     } else {
-      // console.log(pharm, count, token_user, Number(product_id));
-        await fetch(`http://localhost:8080/add`, {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(
-            { 
-              "productId": Number(product_id), 
-              "token": token_user, 
-              "count": count, 
-              "pharm": pharm,
-            }
-          )
+      if (ArrayBasket.length > 0) {
+        const pharmacyInCart = ArrayBasket[0].pharm_id;
+        if (pharm !== pharmacyInCart) {
+          setIsModalOpen(true);
+          return;
+        }
+      }
+      await fetch(`http://localhost:8080/add`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "productId": Number(product_id),
+          "token": token_user,
+          "count": count,
+          "pharm": pharm,
         })
-          .then(response => response.json())
-          .then(data => {
-            navigate("/basket")
-          })
-
+      })
+        .then(response => response.json())
+        .then(data => {
+          navigate("/basket");
+        });
     }
   }
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/basket`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "token": token,
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        setArrayBasket(data.items);
+      })
+      .catch(error => console.error('Error fetching basket:', error));
+  }, [token]);
 
   const handleSelectPharmacy = (pharmId, quantity) => {
     const selected = pharmacies.find((pharm) => pharm.pharm_id === pharmId);
@@ -85,7 +108,7 @@ export default function Dropdown({ pharmacies, productCount }) {
           <p className='txt_row'>В наличии: {quantity < 5 ? <h3 className='lettering_semi_bold txt_red'> Мало</h3> : <h3 className='lettering_semi_bold txt_green'>Много</h3>}</p>
 
           <div className="row_counter">
-            <Counter quantity={quantity} onCounterChange={handleCounterChange} number={1}/>
+            <Counter quantity={quantity} onCounterChange={handleCounterChange} number={1} />
             {/* В фукнцию передать id */}
             <button
               onClick={() => handleCartClick(selectedPharmacy.pharm_id, productId, token)}
@@ -101,6 +124,17 @@ export default function Dropdown({ pharmacies, productCount }) {
             </button>
             <h2 className='txt_white lettering_semi_bold'>Для добавления товара в корзину, пожалуйста, авторизируйтесь</h2>
             <button className='my_button' onClick={() => { navigate('/auth') }}> <h3 className='lettering_semi_bold'>Перейти к авторизации</h3></button>
+          </div>
+        </div>
+      )}
+      {isModalOpen && (
+        <div className="modal_container">
+          <div className="modal">
+            <button className='close_btn' onClick={() => setIsModalOpen(false)}>
+              <RiCloseFill className='close' />
+            </button>
+            <h2 className='txt_white lettering_semi_bold'>В корзине есть продукт из другой аптеки. <br></br> Нельзя выбрать продукты из разных аптек!</h2>
+            <button className='my_button' onClick={() => setIsModalOpen(false)}> <h3 className='lettering_semi_bold'>Ок</h3></button>
           </div>
         </div>
       )}

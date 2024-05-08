@@ -1,20 +1,64 @@
-.head_account{
+.head_account {
     display: flex;
     flex-direction: column;
-    gap: 1vh;
+    gap: 2vh;
     margin: 0;
-    text-align: center;
+    align-items: center;
 }
 
-.head_account h1{
+.head_account h1 {
     margin: 0;
 }
-.order{
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
+
+.order {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.order h2{
+.order h2 {
     margin-top: 5vh;
+}
+
+.info_order,
+.container_head,
+.container_orders,
+.container_order {
+    display: flex;
+    flex-direction: column;
+}
+
+.container_head {
+    gap: 0.5vh;
+    align-items: center;
+
+}
+
+.container_orders {
+    margin-top: 50px;
+    gap: 5vh;
+    align-items: center;
+}
+
+.container_order {
+    background: #40394a;
+    border-radius: 20px;
+    width: 70vw;
+    padding: 30px 5vw;
+    gap: 7vh;
+}
+
+.header_order {
+    display: flex;
+    /* Делаем .header_order флекс-контейнером */
+    justify-content: center;
+    /* Центрируем содержимое по горизонтали */
+    margin: 0;
+}
+
+.info_order {
+    gap: 1vh;
+}
+.right_info{
+    align-items: flex-end;
 }
