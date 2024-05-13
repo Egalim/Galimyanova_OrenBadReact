@@ -10,11 +10,11 @@ import MainApp from './MainApp/MainApp';
 import Auth from './Entry/Auth';
 import Reg from './Entry/Registration';
 import CardCat from './Cards/CardCat';
-import AddProduct from './AddProduct/AddProduct';
 import InfoOrder from './account/Order/InfoOrder';
 import Search from './Cards/Search';
 import Pharm from './acoountPharm/Pharm';
 import PharmOrder from './acoountPharm/order/PharmOrder';
+import ChangeAccount from './account/ChangeAccount';
 
 const router = createBrowserRouter([
   {
@@ -111,6 +111,10 @@ const authRouter = createBrowserRouter([
         element: <Reg />
       },
       {
+        path: '/changeAccount',
+        element: <ChangeAccount />
+      },
+      {
         path: '*',
         element: <Navigate to="/" />
       }
@@ -128,7 +132,7 @@ const authRouterPharm = createBrowserRouter([
         element: <Pharm />
       },
       {
-        path: '/PharmOrder/:id',
+        path: '/PharmOrder/:pharmId/:orderId',
         element: <PharmOrder />
       },
       {

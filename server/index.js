@@ -51,10 +51,17 @@ app.post('/add', basketOrderController.AddProduct)
 app.post('/basket', basketOrderController.getBasket)
 app.post('/update_quantity', basketOrderController.UpdateQuantity);
 app.post('/basket_delete', basketOrderController.DeleteBasket)
+app.post('/order', basketOrderController.postOrder)
 
+app.get('/getUserOrders/:id', basketOrderController.getUserOrders)
+app.get('/getUserOrders/userOrder/:id', basketOrderController.getUserOrdersID)
 
-app.get('/pharm/:id', profile.PharmProfile)
+   
+app.get('/pharm/:id', profile.PharmProfileAll)
+app.get('/pharm/:pharmId/:orderId/:id', profile.PharmProfile) 
+app.get('/success/:orderid/:statusid', profile.PharmProfileSuccess)
 app.get('/profile/:id', profile.getUserProfile)
+app.put('/changeAccount/:id', profile.updateUserProfile)
 
 const start = async () => {
     await sql`create table if not exists Roles(
@@ -62,7 +69,7 @@ const start = async () => {
         role varchar(255) NOT NULL
     )`
     //await sql`insert into Roles (role) values ('USER'), ('PHARM'), ('ADMIN')`
-
+    
     await sql`create table if not exists Users(
         id SERIAL PRIMARY KEY NOT NULL,
         name varchar(255) NOT NULL,
@@ -71,7 +78,7 @@ const start = async () => {
         roleid INT NOT NULL,
         FOREIGN KEY (roleid) REFERENCES Roles(id)
     )`
-
+    
     await sql`create table if not exists Category(
         id_cat SERIAL PRIMARY KEY NOT NULL,
         name_cat varchar(255) NOT NULL
@@ -80,7 +87,7 @@ const start = async () => {
         id_maker SERIAL PRIMARY KEY NOT NULL,
         name varchar(255) NOT NULL
     )`
-
+    
     await sql`create table if not exists Pharm(
         id SERIAL PRIMARY KEY NOT NULL,
         name varchar(255) NOT NULL,
@@ -99,6 +106,7 @@ const start = async () => {
         FOREIGN KEY (categoryid) REFERENCES Category(id),
         FOREIGN KEY (makerid) REFERENCES Maker(id)
     )`
+    
     await sql`create table if not exists Quantity(
         id SERIAL PRIMARY KEY NOT NULL,
         quantity INT NOT NULL,
@@ -126,18 +134,29 @@ const start = async () => {
         id SERIAL PRIMARY KEY NOT NULL,
         status varchar(255) NOT NULL
     )`
+    //await sql`insert into Statuses (status) values ('В ожидании'), ('Готов к получению'), ('Отклонён'), ('Получен')`
+
     await sql`CREATE TABLE IF NOT EXISTS Orders (
         id SERIAL PRIMARY KEY NOT NULL,
         date TIMESTAMP WITH TIME ZONE DEFAULT timezone('Asia/Yekaterinburg', CURRENT_TIMESTAMP),
         price numeric NOT NULL, 
+        nameUser varchar(255) not null,
+        telUser varchar(255) not null,
         userid INT NOT NULL,
-        productid INT NOT NULL,
+        order_product_id INT NOT NULL,
         pharmid INT NOT NULL,
-        statusid INT NOT NULL,
+        statusid INT NOT NULL,  
         FOREIGN KEY (userid) REFERENCES Users(id),
-        FOREIGN KEY (productid) REFERENCES Products(id),   
         FOREIGN KEY (pharmid) REFERENCES Pharm(id),
         FOREIGN KEY (statusid) REFERENCES Statuses(id)
+    )` 
+
+    await sql`CREATE TABLE IF NOT EXISTS Orders_Product_Id (
+        id SERIAL PRIMARY KEY NOT NULL,
+        productid INT NOT NULL,
+        count INT NOT NULL,
+        key INT NOT NULL,
+        FOREIGN KEY (productid) REFERENCES Products(id)
     )`
 
     app.listen(8080, () => {

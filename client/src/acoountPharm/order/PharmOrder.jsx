@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import img from '../../assets/spirulina.png'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import CardOrder from '../../components/CardOrder/CardOrder';
 import logo from '../../assets/icons/logo.svg'
 import Footer from '../../components/Footer/Footer';
@@ -10,56 +10,24 @@ import { logOut } from '../../redux/authSlice';
 export default function PharmOrder() {
     const dispatch = useDispatch()
     const id = useSelector((state) => state.auth.id)
-    const order = [{
-        id_order: "1",
-        date_order: "14.04.2024",
-        name: "Галимьянова Элеонора ",
-        price: "1500",
-        tel: "89873435055"
-}]
-    const orderCard = [
-        {
-            id: "1",
-            title: "Спирулина ВЭЛ табл. 500 мг",
-            image: img,
-            price: "710.00",
-            name_maker: "В-МИН ООО/ ДИОД ПАО",
-            count: "2"
-        },
-        {
-            id: "2",
-            title: "Спирулина ВЭЛ табл. 500 мг",
-            image: img,
-            price: "710.00",
-            name_maker: "В-МИН ООО/ ДИОД ПАО",
-            count: "2"
-        },
-        {
-            id: "2",
-            title: "Спирулина ВЭЛ табл. 500 мг",
-            image: img,
-            price: "710.00",
-            name_maker: "В-МИН ООО/ ДИОД ПАО",
-            count: "2"
-        },
-        {
-            id: "3",
-            title: "Спирулина ВЭЛ табл. 500 мг",
-            image: img,
-            price: "710.00",
-            name_maker: "В-МИН ООО/ ДИОД ПАО",
-            count: "2"
-        }
-    ]
+    const { pharmId, orderId  } = useParams(); 
+    console.log(orderId, pharmId);
     const [Pharm, setPharm] = useState([])
+    const [orderCard, setorderCard] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:8080/pharm/${id}`)
-            .then(response => response.json())
-            .then(data => {
-                setPharm(data)
-                console.log(data)
-            })
-    }, [])
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/pharm/${pharmId}/${orderId}/${id}`);
+                const data = await response.json();
+                console.log(data);
+                setPharm(data.data)
+                setorderCard(data.products)
+            } catch (error) {
+                console.error('Ошибка при получении данных о фармацевте:', error);
+            }
+        };
+        fetchData();
+    }, [id])
     return (
         <>
             <div className="header">
@@ -69,10 +37,10 @@ export default function PharmOrder() {
                             <img src={logo} alt='logo' />
                         </Link>
                     </div>
-                    <div>{
-                        Pharm.map((e) => (
-                            <h3 className='lettering_semi_bold txt_white'>{e.name}</h3>
-                        ))}
+                    <div>
+                        {Pharm.length > 0 && (
+                            <h3 className='lettering_semi_bold txt_white'>{Pharm[0].pharm_name}</h3>
+                        )}
                     </div>
                     <button onClick={() => {
                         dispatch(logOut())
@@ -83,15 +51,16 @@ export default function PharmOrder() {
                 <div className="content content_order">
                     <div className="row_header">
                         <Link className="linkHome txt_grey" to={`/`}>Вернуться назад </Link>
-                        <div className="txt_row head_order"><h2 className='lettering_bold'>Заказ № {order[0].id_order}</h2>
-                            <h3>от {order[0].date_order}</h3></div>
+                        <div className="txt_row head_order"><h2 className='lettering_bold'>Заказ № {Pharm[0]?.id_order}</h2>
+                            <h3>от {Pharm[0]?.date_order.split('T')[0]}</h3></div>
                     </div>
 
                     <div className="container_cards_order">
                         {
                             orderCard.map((e) => {
                                 return (
-                                    <CardOrder key={orderCard[0].id} id_product={orderCard[0].id} title={orderCard[0].title} image={orderCard[0].image} price={orderCard[0].price} name_maker={orderCard[0].name_maker} count={orderCard[0].count} />
+                                    <CardOrder key={e.id} id_product={e.id} title={e.product_title} image={e.product_image}
+                                     price={e.product_price} name_maker={e.name_maker} count={e.product_count} />
                                 )
                             })
                         }
@@ -99,13 +68,13 @@ export default function PharmOrder() {
 
                     <div className="info_order">
                         <div className="txt_row">
-                            <h3 className='lettering_semi_bold'>Получатель:</h3> <p>{order[0].name}</p>
+                            <h3 className='lettering_semi_bold'>Получатель:</h3> <p>{Pharm[0]?.nameuser}</p>
                         </div>
                         <div className="txt_row">
-                            <h3 className='lettering_semi_bold txt_green'>Итого:</h3> <h2 className='lettering_bold price'>{order[0].price}</h2>
+                            <h3 className='lettering_semi_bold txt_green'>Итого:</h3> <h2 className='lettering_bold price'>{Pharm[0]?.order_price}</h2>
                         </div>
                         <div className="txt_row">
-                            <h3 className='lettering_semi_bold'>Телефон:</h3> <p>{order[0].tel}</p>
+                            <h3 className='lettering_semi_bold'>Телефон:</h3> <p>{Pharm[0]?.teluser}</p>
                         </div>
                     </div>
 
