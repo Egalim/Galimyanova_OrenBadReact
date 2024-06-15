@@ -16,3 +16,11 @@
 .sidenav_item.active p {
     color: #7ECA9C;
 }
+@media (max-width: 610px) {
+    .sideNav {
+        column-count: 2;
+        margin-bottom: 10px;
+    }
+    .sidenav_item hr{
+        border-bottom: none;
+    }}

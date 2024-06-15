@@ -36,7 +36,7 @@ class Profile{
         from Orders  
         INNER JOIN orders_product_id ON Orders.order_product_id = orders_product_id.key 
         INNER JOIN Products ON orders_product_id.productid = Products.id 
-        where Orders.pharmid = ${data[0].id_pharm}
+        where Orders.pharmid = ${data[0].id_pharm} 
         GROUP BY Products.id`
 
         res.send({"data": data, "products": products})
@@ -73,15 +73,39 @@ class Profile{
         INNER JOIN Products ON orders_product_id.productid = Products.id 
         where Orders.pharmid = ${userId} and Orders.id = ${orderId}
         GROUP BY Products.id, Orders_Product_Id.count`;
-     
+      
         res.send({"data": data, "products": products});
     }
 
     async PharmProfileSuccess(req, res) {
         const status_id = req.params.statusid
         const order_id = req.params.orderid
+
+        if(status_id == 3) {
+          const stats = await sql`SELECT * FROM Orders 
+          WHERE Orders.id = ${order_id}`;
+
+          const product_stats = await sql`SELECT * FROM orders_product_id 
+          WHERE orders_product_id.key = ${stats[0]['order_product_id']}`;
+
+          for (let index = 0; index < product_stats.length; index++) {
+            const item = product_stats[index];
+            
+            const product_quantity = await sql`
+                    SELECT * FROM quantity
+                    WHERE productid = ${item['productid']} and pharmid = ${stats[0]['pharmid']}`;
+
+            const new_count = product_quantity[0]['quantity'] + item['count']
+
+            await sql`
+                    UPDATE quantity
+                    SET quantity = ${new_count} 
+                    WHERE productid = ${item['productid']} and pharmid = ${stats[0]['pharmid']}`;
+          }
+        }
+
         const products = await sql`Update Orders SET statusid = ${status_id} WHERE id = ${order_id}`
-        res.send({"data": products})
+        res.send({"data": "test"})
     }
 
     async getUserProfile(req, res)  {

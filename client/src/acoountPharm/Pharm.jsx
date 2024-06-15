@@ -11,16 +11,17 @@ const Pharm = () => {
     const navigate = useNavigate()
     const id = useSelector((state) => state.auth.id)
     const [Pharm, setPharm] = useState([])
+    console.log(Pharm);
 
     async function Submits(e, params) {
-        await fetch(`http://localhost:8080/success/${params[1]}/${params[0]}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error submitting data:', error);
-            });
+        try {
+            const response = await fetch(`http://localhost:8080/success/${params[1]}/${params[0]}`);
+            const data = await response.json();
+            console.log(data);
+            location.reload();
+        } catch (error) {
+            console.error('Error submitting data:', error);
+        }
     }
 
     useEffect(() => {
@@ -101,7 +102,7 @@ const Pharm = () => {
                                                 </button>
                                             </div>
                                         )}
-                                        {e.status !== "Получен" && e.status !== "Отклонён" && (
+                                        {e.status !== "Получен" && e.status !== "Отклонён" && e.status == "Готов к получению" &&(
                                             <button
                                                 className='btn_purple'
                                                 onClick={(m) => { Submits(m, [4, e.id_order]) }}>

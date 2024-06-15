@@ -27,3 +27,28 @@
     text-decoration-thickness: px;
     text-underline-position: under;
   }
+  .line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+
+.expand-button {
+    background: none;
+    border: none;
+    color: #7ECA9C;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+    text-decoration: underline;
+}
+@media (max-width: 610px) {
+    .main_block_catalog {
+        grid-template-columns: 1fr; /* Одна колонка на мобильных устройствах */
+        gap: 4vw; /* Уменьшаем промежуток между элементами */
+    }
+    .info_product{
+        margin-bottom: 30px;
+    }
+}

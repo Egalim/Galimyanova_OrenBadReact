@@ -50,9 +50,7 @@
 
 .header_order {
     display: flex;
-    /* Делаем .header_order флекс-контейнером */
     justify-content: center;
-    /* Центрируем содержимое по горизонтали */
     margin: 0;
 }
 
@@ -61,4 +59,19 @@
 }
 .right_info{
     align-items: flex-end;
+}
+@media (max-width: 610px) {
+
+    .right_info{
+        align-items: flex-start;
+    }
+    .container_orders {
+        margin-top: 20px;
+        gap: 2vh;
+    }
+    .container_order {
+        width: 90vw;
+        padding: 30px 5vw;
+        gap: 1vh;
+    }
 }

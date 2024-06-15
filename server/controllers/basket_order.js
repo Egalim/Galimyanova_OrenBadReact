@@ -116,10 +116,21 @@ class BasketOrderController {
             for (let index = 0; index < productId.length; index++) {
                 const element = productId[index];
                 const count_product = count[index];
-                console.log(element);
                 await sql`
                     INSERT INTO orders_product_id (productid, count, key)
                     VALUES (${element}, ${count_product}, ${number}); `;
+
+                const product_count = await sql`
+                    SELECT * FROM products
+                    INNER JOIN quantity ON products.id = quantity.productid
+                    WHERE products.id = ${element}`;
+
+                const new_count = product_count[0]['quantity'] - count_product
+
+                await sql`
+                    UPDATE quantity
+                    SET quantity = ${new_count} 
+                    WHERE productid = ${product_count[0]['productid']} and pharmid = ${product_count[0]['pharmid']}`;
             }
             
             // Вставляем данные заказа в таблицу Orders
@@ -156,7 +167,14 @@ class BasketOrderController {
         INNER JOIN Pharm ON Orders.pharmid = Pharm.id
         INNER JOIN Statuses ON Orders.statusid = Statuses.id
         WHERE Orders.userid = ${id}
-        ORDER BY Orders.date DESC`;
+        ORDER BY 
+        CASE
+        WHEN Statuses.status = 'Готов к получению' THEN 1
+        WHEN Statuses.status = 'В ожидании' THEN 2
+        WHEN Statuses.status = 'Получен' THEN 3
+        WHEN Statuses.status = 'Отклонён' THEN 4
+        ELSE 5
+    END ASC`;
             // Отправляем данные о заказах обратно в клиентский интерфейс
         res.status(200).send({ "order": data });
         } catch (error) {

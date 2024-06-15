@@ -45,9 +45,11 @@ export default function Auth() {
                         <form className='form-at'>
                             <h1 className='lettering_semi_bold txt_white' style={{ marginBottom: "5vh" }}>Авторизация</h1>
                             <div className="form-content">
+
+                            <label className='txt_white'>Введите номер телефона:</label>
                                 <div className="validate-input-at" data-validate="Обязательное поле">
                                     <input className="input-at"
-                                        placeholder="Введите номер телефона:"
+                                        placeholder="+7(XXX)-XXX-XX-XX:"
                                         type="tel"
                                         id="tel"
                                         name="tel"
@@ -57,9 +59,11 @@ export default function Auth() {
                                     />
                                     <span className="focus-input-at"></span>
                                 </div>
+
+                                <label className='txt_white'>Введите пароль:</label>
                                 <div className="validate-input-at" data-validate="Обязательное поле">
                                     <input className="input-at"
-                                        placeholder="Введите пароль:"
+                                        placeholder="Ваш пароль:"
                                         type="password"
                                         id="password"
                                         name="password"

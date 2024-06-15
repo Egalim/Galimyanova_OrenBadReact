@@ -34,3 +34,8 @@
 input::-webkit-search-cancel-button {
     -webkit-appearance: none;
 }
+@media (max-width: 610px) {
+    .search {
+        width: 80vw;
+    }
+  }

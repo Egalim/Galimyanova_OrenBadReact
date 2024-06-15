@@ -3,3 +3,9 @@
     max-width: 20vw;
     overflow: hidden;
 }
+
+@media (max-width: 610px) {
+    .pathPage {
+       display: none;
+    }
+}

@@ -35,8 +35,6 @@ export const authSlice = createSlice({
             state.roleid = payload.user.roleid
             state.id = payload.user.id
 
-            console.log(payload.user);
-
             localStorage.setItem('token', payload.token)
             localStorage.setItem('roleId', payload.user.roleid)
             localStorage.setItem('id', payload.user.id)
@@ -54,8 +52,6 @@ export const authSlice = createSlice({
 })
 
 export const authThunk = createAsyncThunk('authThunk', async (data, { rejectWithValue }) => {
-    const { tel, password } = data
-
     try {
         const result = await fetch('http://localhost:8080/auth', {
             method: 'POST',

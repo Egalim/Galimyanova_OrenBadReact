@@ -17,7 +17,7 @@ export default function Card({ img, nameProduct, maker, price}) {
               </div>
             </h3>
           </div>
-          <h4>{maker}</h4>
+          <h4 className='mkr'>{maker}</h4>
           <h2 class="lettering_bold product_rub">{price}</h2>
           <button type="button" class="card_product_btn">
             <span class="lettering_semi_bold">Выбрать товар</span>

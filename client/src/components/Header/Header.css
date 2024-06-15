@@ -4,7 +4,6 @@
   background-color: #40394A;
   padding-top: 14px;
   z-index: 1;
-
 }
 
 .container {
@@ -38,7 +37,6 @@
 
 .dropdown-toggle {
   position: relative;
-  /* Сделать позиционирование для кнопки */
   display: block;
   border: none;
   cursor: pointer;
@@ -48,7 +46,6 @@
   color: #F5F7F7;
   position: absolute;
   top: 120%;
-  /* Отображать меню под кнопкой */
   background-color: #40394A;
   box-shadow: 0 0 10px rgba(20, 20, 20, 0.1);
   padding: 10px 50px;
@@ -60,7 +57,6 @@
 
 .dropdown:hover .dropdown-menu {
   display: block;
-  /* Отображать меню при наведении на родительский элемент */
 }
 
 .modal_container {
@@ -72,7 +68,8 @@
   background-color: rgba(64, 57, 74, 0.247);
   z-index: 100;
 }
-.modal_container, .modal, .close_btn{
+
+.modal_container, .modal, .close_btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +84,6 @@
   flex-direction: column;
   gap: 10vh;
   max-height: 90vh;
-
 }
 
 .close_btn {
@@ -99,7 +95,45 @@
   height: 60px;
   background: #7eca9c;
 }
-.close{
+
+.close {
   cursor: pointer;
   font-size: 28px;
+}
+
+.hamburger-menu {
+  display: none; /* Hide by default */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #F5F7F7;
+}
+
+@media (max-width: 610px) {
+  .catalog {
+    grid-template-columns: 1fr;
+    gap: 2vw;
+  }
+
+  .nav {
+    display: none; /* Hide the nav by default */
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #40394A;
+    padding: 20px;
+    z-index: 10;
+  }
+
+  .nav.mobile-menu-open {
+    display: flex; /* Show nav when menu is open */
+  }
+
+  .hamburger-menu {
+    display: block; /* Show hamburger icon */
+  }
 }

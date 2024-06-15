@@ -4,11 +4,11 @@ import cors from "cors";
 import { sql } from "./db.js";
 import { reg } from "./controllers/reg.js"
 import { auth } from "./controllers/auth.js"
-import { postController } from "./controllers/postController.js";
-import { uploadFiles } from "./controllers/uploadFiles.js";
+// import { uploadFiles } from "./controllers/uploadFiles.js";
 import { productController } from "./controllers/porducts.js";
 import { profile } from "./controllers/profile.js";
 import { basketOrderController } from "./controllers/basket_order.js";
+// import { postController } from "./controllers/postController.js";
 
 
 const storage = multer.diskStorage({
@@ -41,8 +41,8 @@ app.get('/search', productController.Search);
 
 app.post('/reg', reg)
 app.post('/auth', auth)
-app.post('/newproduct', upload.single("image"), uploadFiles);
 
+// app.post('/newproduct', upload.single("image"), uploadFiles);
 // app.post('/category', postController.postCategory)
 // app.post('/maker', postController.postMaker)
 

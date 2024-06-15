@@ -47,3 +47,12 @@
 .txt_red{
     color: #CA7E7E;
 }
+
+@media (max-width: 610px) {
+    .selected{
+        margin-top: 10px;
+        display: table-column;
+        gap: 5px;
+        
+    }
+}

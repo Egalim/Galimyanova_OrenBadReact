@@ -15,6 +15,7 @@ import Search from './Cards/Search';
 import Pharm from './acoountPharm/Pharm';
 import PharmOrder from './acoountPharm/order/PharmOrder';
 import ChangeAccount from './account/ChangeAccount';
+// import AddProduct from './AddProduct/AddProduct';
 
 const router = createBrowserRouter([
   {
@@ -117,7 +118,11 @@ const authRouter = createBrowserRouter([
       {
         path: '*',
         element: <Navigate to="/" />
-      }
+      },
+      // {
+      //   path: '/addNewProduct',
+      //   element: <AddProduct />
+      // },
     ]
   }
 ])
@@ -143,29 +148,12 @@ const authRouterPharm = createBrowserRouter([
   }
 ])
 
-// const authRouterAdmin = createBrowserRouter([
-//   {
-//     path: '/',
-//     element: <Outlet />,
-//     children: [
-//       {
-//         path: '/addNewProduct',
-//         element: <AddProduct />
-//       },
-//       {
-//         path: '*',
-//         element: <Navigate to="/addNewProduct" />
-//       }
-//     ]
-//   }
-// ])
+
 
 function App() {
   const token = useSelector((state) => state.auth.token)
   const role = useSelector((state) => state.auth.roleid)
   const id = useSelector((state) => state.auth.id)
-
-  console.log({ token, role, id })
 
   return (
     token ?

@@ -63,6 +63,18 @@
     color: #F5F7F7;
     cursor: pointer;
 }
+
+.mkr{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+  box-orient: vertical;
+}
 .texturl {
     transition: transform 2 ease; /* добавляем переход для свойства transform */
     display: inline-block;

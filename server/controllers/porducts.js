@@ -2,8 +2,13 @@ import { sql } from "../db.js"
 
 class ProductController {
     async getCategory(req, res) {
-        const data = await sql`select * from Category ORDER BY name_cat ASC `
-        res.send(data)
+        try {
+            const data = await sql`select * from Category ORDER BY name_cat ASC`;
+            res.send(data);
+        } catch (error) {
+            console.error('Error getting categories:', error);
+            res.status(500).json({ error: 'Ошибка сервера' });
+        }
     }
 
     async getPharm(req, res) {
