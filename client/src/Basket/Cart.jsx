@@ -4,6 +4,7 @@ import Counter from '../components/counter/Counter'
 import trash from '../assets/icons/trash.svg'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import url from '../config'
 
 export default function Cart({ drop_product, id, image, title, name_maker, pharmid, pharm, price, count, onQuantityChange }) {
   const { productId } = useParams();
@@ -15,7 +16,7 @@ export default function Cart({ drop_product, id, image, title, name_maker, pharm
   const handleCounterChange = (count, price) => {
     setCount1(count);
     setnewPrice(count * price)
-    fetch(`http://localhost:8080/update_quantity`, {
+    fetch(`${url}/update_quantity`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +36,7 @@ export default function Cart({ drop_product, id, image, title, name_maker, pharm
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:8080/products/${id}/${pharmid}/quantity`)
+      fetch(`${url}/products/${id}/${pharmid}/quantity`)
         .then(response => response.json())
         .then(data => {
           setQuantity(data);
@@ -47,7 +48,7 @@ export default function Cart({ drop_product, id, image, title, name_maker, pharm
 
   return (
     <div className="container_cart ">
-      <img src={'http://localhost:8080/' + image} alt="product" className='cart_img' />
+      <img src={`${url}/` + image} alt="product" className='cart_img' />
 
       <div className="info_cart">
         <h2 className='lettering_semi_bold'>{title}</h2>

@@ -7,6 +7,7 @@ import FormSearch from '../components/FormSearch/FormSearch';
 import Info_delivery from '../components/info_delivery/Info_delivery';
 import Dropdown from '../components/dropdown/Dropdown';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import url from '../config';
 
 export default function CardProduct() {
     const location = useLocation();
@@ -21,7 +22,7 @@ export default function CardProduct() {
     const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/product/${productId}`)
+        fetch(`${url}/product/${productId}`)
             .then(response => response.json())
             .then(data => {
                 setProduct(data); // Обновите состояние продукта
@@ -34,7 +35,7 @@ export default function CardProduct() {
     const [pharm, setPharm] = useState([]);
     useEffect(() => {
         if (productId) {
-          fetch(`http://localhost:8080/products/${productId}/pharm`)
+          fetch(`${url}/products/${productId}/pharm`)
             .then(response => response.json())
             .then(data => {
               setPharm(data); // Установка данных в состояние
@@ -45,7 +46,7 @@ export default function CardProduct() {
 
     useEffect(() => {
         if (categoryId) {
-            fetch(`http://localhost:8080/category/${categoryId}`)
+            fetch(`${url}/category/${categoryId}`)
                 .then(response => response.json())
                 .then(data => {
                     setCategoryName(data[0]?.name_cat);
@@ -72,7 +73,7 @@ export default function CardProduct() {
                     <div className="mar-35"></div>
 
                     <div className="main_block_catalog">
-                        <img src={`http://localhost:8080/` + `${product[0]?.image}`} alt="product" />
+                        <img src={`${url}/` + `${product[0]?.image}`} alt="product" />
 
                         <div className="info_product">
                             <h1 className='lettering_bold'>{product[0]?.title}</h1>

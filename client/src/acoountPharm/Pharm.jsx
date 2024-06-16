@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { logOut } from '../redux/authSlice'
 import Footer from '../components/Footer/Footer'
+import url from '../config'
 
 const Pharm = () => {
     const dispatch = useDispatch()
@@ -15,7 +16,7 @@ const Pharm = () => {
 
     async function Submits(e, params) {
         try {
-            const response = await fetch(`http://localhost:8080/success/${params[1]}/${params[0]}`);
+            const response = await fetch(`${url}/success/${params[1]}/${params[0]}`);
             const data = await response.json();
             console.log(data);
             location.reload();
@@ -27,7 +28,7 @@ const Pharm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/pharm/${id}`);
+                const response = await fetch(`${url}/pharm/${id}`);
                 const data = await response.json();
                 console.log(data);
                 setPharm(data.data);

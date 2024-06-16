@@ -3,6 +3,7 @@ import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import url from '../config'
 
 const ChangeAccount = () => {
   const id = useSelector((state) => state.auth.id)
@@ -11,7 +12,7 @@ const ChangeAccount = () => {
   const [Update, setUpdate] = useState(null)
 
   useEffect(() => {
-    fetch(`http://localhost:8080/profile/${id}`)
+    fetch(`${url}/profile/${id}`)
       .then(response => response.json())
       .then(data => {
         setName(data[0]?.name)
@@ -35,7 +36,7 @@ const ChangeAccount = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:8080/changeAccount/${id}`, {
+      const response = await fetch(`${url}/changeAccount/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

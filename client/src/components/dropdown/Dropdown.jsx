@@ -4,6 +4,7 @@ import Counter from '../counter/Counter';
 import { useSelector } from 'react-redux'
 import { RiCloseFill } from "react-icons/ri";
 import { useParams, redirect, useNavigate } from 'react-router-dom';
+import url from '../../config';
 
 
 export default function Dropdown({ pharmacies, productCount }) {
@@ -33,7 +34,7 @@ export default function Dropdown({ pharmacies, productCount }) {
           return;
         }
       }
-      await fetch(`http://localhost:8080/add`, {
+      await fetch(`${url}/add`, {
         method: "POST",
         mode: "cors",
         headers: {
@@ -54,7 +55,7 @@ export default function Dropdown({ pharmacies, productCount }) {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:8080/basket`, {
+    fetch(`${url}/basket`, {
       method: "POST",
       mode: "cors",
       headers: {

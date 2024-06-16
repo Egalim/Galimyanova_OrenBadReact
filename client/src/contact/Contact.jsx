@@ -5,6 +5,7 @@ import './Contact.css'
 import Form from '../components/form/Form'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import url from '../config'
 
 export default function Contact() {
   const location = useLocation();
@@ -12,7 +13,7 @@ export default function Contact() {
 
   const [array, setArray] = useState([])
     useEffect(() => {
-        fetch('http://localhost:8080/pharms')
+        fetch(`${url}/pharms`)
             .then(response => response.json())
             .then(json => setArray(json))
     }, [])

@@ -8,6 +8,7 @@ import Cart from './Cart';
 import Info_delivery from '../components/info_delivery/Info_delivery';
 import { useSelector } from 'react-redux';
 import { RiCloseFill } from "react-icons/ri";
+import url from '../config';
 
 const Basket = () => {
   const token = useSelector((state) => state.auth.token);
@@ -23,7 +24,7 @@ const Basket = () => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/profile/${id}`)
+    fetch(`${url}/profile/${id}`)
       .then(response => response.json())
       .then(data => {
         setProfile(data); 
@@ -57,7 +58,7 @@ const Basket = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:8080/basket`, {
+    fetch(`${url}/basket`, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -85,7 +86,7 @@ const Basket = () => {
     });
     setArray(new_array);
 
-    fetch(`http://localhost:8080/basket_delete`, {
+    fetch(`${url}/basket_delete`, {
       method: "POST",
       mode: "cors",
       headers: {
@@ -111,7 +112,7 @@ const Basket = () => {
 
   const handleOrderSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:8080/order', {
+      const response = await fetch(`${url}/order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

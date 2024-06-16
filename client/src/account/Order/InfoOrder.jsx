@@ -5,6 +5,7 @@ import Footer from '../../components/Footer/Footer';
 import CardOrder from '../../components/CardOrder/CardOrder';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import url from '../../config';
 
 export default function InfoOrder() {
   const { id } = useParams();
@@ -13,7 +14,7 @@ export default function InfoOrder() {
   const [OrderInfo, setOrderInfo] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/getUserOrders/userOrder/${id}`)
+    fetch(`${url}/getUserOrders/userOrder/${id}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

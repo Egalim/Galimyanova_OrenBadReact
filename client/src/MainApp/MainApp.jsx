@@ -5,13 +5,14 @@ import Footer from '../components/Footer/Footer'
 import SideNav from '../components/SideNav/SideNav'
 import FormSearch from '../components/FormSearch/FormSearch'
 import Cards from '../Cards/Cards'
+import url from './../config.js'
 
 const MainApp = () => {
   const [array, setArray] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
   useEffect(() => {
-      fetch('http://localhost:8080/products')
+      fetch(`${url}/products`)
           .then(response => response.json())
           .then(json => {
               setArray(json); // Оставьте эту строку без изменений

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import url from "../config"
 
 const initialState = {
     loading: false,
@@ -53,7 +54,7 @@ export const authSlice = createSlice({
 
 export const authThunk = createAsyncThunk('authThunk', async (data, { rejectWithValue }) => {
     try {
-        const result = await fetch('http://localhost:8080/auth', {
+        const result = await fetch(`${url}/auth`, {
             method: 'POST',
             mode: 'cors',
             headers: {

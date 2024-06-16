@@ -5,6 +5,7 @@ import Footer from '../components/Footer/Footer'
 import edit from '../assets/icons/edit.svg'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import url from '../config'
 
 export default function Account() {
   const token = useSelector((state) => state.auth.token)
@@ -12,7 +13,7 @@ export default function Account() {
   const id = useSelector((state) => state.auth.id)
   const [profile, setprofile] = useState('')
   useEffect(() => {
-    fetch(`http://localhost:8080/profile/${id}`)
+    fetch(`${url}/profile/${id}`)
       .then(response => response.json())
       .then(data => {
         setprofile(data); // Обновите состояние продуктов
@@ -24,7 +25,7 @@ export default function Account() {
 
   const [Orders, setOrders] = useState('')
   useEffect(() => {
-    fetch(`http://localhost:8080/getUserOrders/${id}`, {
+    fetch(`${url}/getUserOrders/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

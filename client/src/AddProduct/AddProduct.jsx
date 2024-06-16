@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import Header from '../components/Header/Header'
+import url from '../config'
 
 const AddProduct = () => {
     const [title, settitle] = useState('')
@@ -32,7 +33,7 @@ const AddProduct = () => {
             formData.append('categoryid', categoryid);
             formData.append('makerid', makerid);
 
-            const response = await fetch('http://localhost:8080/newproduct', {
+            const response = await fetch(`${url}/newproduct`, {
                 method: 'POST',
                 body: formData,
             });

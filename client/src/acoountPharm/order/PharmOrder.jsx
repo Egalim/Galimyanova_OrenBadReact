@@ -6,6 +6,7 @@ import logo from '../../assets/icons/logo.svg'
 import Footer from '../../components/Footer/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../redux/authSlice';
+import url from '../../config';
 
 export default function PharmOrder() {
     const dispatch = useDispatch()
@@ -17,7 +18,7 @@ export default function PharmOrder() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/pharm/${pharmId}/${orderId}/${id}`);
+                const response = await fetch(`${url}/pharm/${pharmId}/${orderId}/${id}`);
                 const data = await response.json();
                 console.log(data);
                 setPharm(data.data)

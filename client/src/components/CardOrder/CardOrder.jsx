@@ -1,10 +1,11 @@
 import React from 'react'
 import './CardOrder.css'
+import url from '../../config'
 
 export default function CardOrder({title,image,price,name_maker,count})  {
   return (
     <div className='container_card_order'>
-        <img src={`http://localhost:8080/` + `${image}`} alt="product" />
+        <img src={`${url}/` + `${image}`} alt="product" />
         <div class="row_card_product">
           <div class="name_product">
             <h3 class="lettering_semi_bold texturl">

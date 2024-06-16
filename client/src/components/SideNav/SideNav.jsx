@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './SideNav.css';
 import { useNavigate, useLocation } from 'react-router-dom';
+import url from '../../config';
 
 export default function SideNav() {
     const navigate = useNavigate();
@@ -8,7 +9,7 @@ export default function SideNav() {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8080/category')
+        fetch(`${url}/category`)
             .then(response => response.json())
             .then(data => setCategories(data))
             .catch(error => console.error('Ошибка при получении данных о категориях:', error));
