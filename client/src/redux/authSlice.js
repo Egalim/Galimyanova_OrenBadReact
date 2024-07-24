@@ -58,6 +58,7 @@ export const authThunk = createAsyncThunk('authThunk', async (data, { rejectWith
             method: 'POST',
             mode: 'cors',
             headers: {
+                "ngrok-skip-browser-warning": "69420",
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(data)

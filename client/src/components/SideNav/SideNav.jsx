@@ -9,7 +9,11 @@ export default function SideNav() {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch(`${url}/category`)
+        fetch(`${url}/category`, {
+            headers: new Headers({
+              "ngrok-skip-browser-warning": "69420",
+            }),
+          })
             .then(response => response.json())
             .then(data => setCategories(data))
             .catch(error => console.error('Ошибка при получении данных о категориях:', error));

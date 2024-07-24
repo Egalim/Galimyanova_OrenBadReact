@@ -22,7 +22,11 @@ export default function CardProduct() {
     const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
-        fetch(`${url}/product/${productId}`)
+        fetch(`${url}/product/${productId}`, {
+            headers: new Headers({
+              "ngrok-skip-browser-warning": "69420",
+            }),
+          })
             .then(response => response.json())
             .then(data => {
                 setProduct(data); // Обновите состояние продукта
@@ -35,7 +39,11 @@ export default function CardProduct() {
     const [pharm, setPharm] = useState([]);
     useEffect(() => {
         if (productId) {
-          fetch(`${url}/products/${productId}/pharm`)
+          fetch(`${url}/products/${productId}/pharm`,{
+            headers: new Headers({
+              "ngrok-skip-browser-warning": "69420",
+            }),
+          })
             .then(response => response.json())
             .then(data => {
               setPharm(data); // Установка данных в состояние
@@ -46,7 +54,11 @@ export default function CardProduct() {
 
     useEffect(() => {
         if (categoryId) {
-            fetch(`${url}/category/${categoryId}`)
+            fetch(`${url}/category/${categoryId}`, {
+                headers: new Headers({
+                  "ngrok-skip-browser-warning": "69420",
+                }),
+              })
                 .then(response => response.json())
                 .then(data => {
                     setCategoryName(data[0]?.name_cat);

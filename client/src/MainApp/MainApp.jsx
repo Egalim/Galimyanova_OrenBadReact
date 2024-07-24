@@ -12,7 +12,11 @@ const MainApp = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
   useEffect(() => {
-      fetch(`${url}/products`)
+      fetch(`${url}/products`, {
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+      })
           .then(response => response.json())
           .then(json => {
               setArray(json); // Оставьте эту строку без изменений

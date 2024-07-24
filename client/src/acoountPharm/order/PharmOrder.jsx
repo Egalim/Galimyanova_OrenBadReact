@@ -18,7 +18,11 @@ export default function PharmOrder() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${url}/pharm/${pharmId}/${orderId}/${id}`);
+                const response = await fetch(`${url}/pharm/${pharmId}/${orderId}/${id}`, {
+                    headers: new Headers({
+                      "ngrok-skip-browser-warning": "69420",
+                    }),
+                  });
                 const data = await response.json();
                 console.log(data);
                 setPharm(data.data)

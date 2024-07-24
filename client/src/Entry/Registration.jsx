@@ -113,7 +113,6 @@ export default function Reg() {
       }));
     }
 
-    // Submit if valid
     if (valid) {
       dispatch(regThunk({
         tel: Tel,
@@ -121,6 +120,15 @@ export default function Reg() {
         password: Pass,
       }));
     }
+  };
+
+  const renderErrorMessage = (error) => {
+    if (typeof error === 'string') {
+      return error;
+    } else if (typeof error === 'object' && error.message) {
+      return error.message;
+    }
+    return JSON.stringify(error);
   };
 
   return (
@@ -211,7 +219,7 @@ export default function Reg() {
               Зарегистрироваться
             </button>
             {formData.message && <h3 style={{ color: '#CA7E7E', marginTop: '1vh' }}>{formData.message}</h3>}
-            {regState.error && <p className="error-message">{regState.error}</p>}
+            {regState.error && <p className="error-message">{renderErrorMessage(regState.error)}</p>}
           </form>
         </div>
       </div>

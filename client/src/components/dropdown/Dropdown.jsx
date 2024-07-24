@@ -38,6 +38,7 @@ export default function Dropdown({ pharmacies, productCount }) {
         method: "POST",
         mode: "cors",
         headers: {
+          "ngrok-skip-browser-warning": "69420",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({

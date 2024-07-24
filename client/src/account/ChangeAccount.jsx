@@ -12,7 +12,11 @@ const ChangeAccount = () => {
   const [Update, setUpdate] = useState(null)
 
   useEffect(() => {
-    fetch(`${url}/profile/${id}`)
+    fetch(`${url}/profile/${id}`, {
+      headers: new Headers({
+        "ngrok-skip-browser-warning": "69420",
+      }),
+    })
       .then(response => response.json())
       .then(data => {
         setName(data[0]?.name)

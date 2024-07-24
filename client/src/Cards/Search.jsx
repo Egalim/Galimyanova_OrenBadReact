@@ -5,6 +5,7 @@ import Navigate from '../components/navigation/Navigate';
 import FormSearch from '../components/FormSearch/FormSearch';
 import SideNav from '../components/SideNav/SideNav';
 import Card from './Card/Card';
+import url from '../config';
 
 export default function Search() {
     const [searchResults, setSearchResults] = useState([]);
@@ -13,7 +14,11 @@ export default function Search() {
     useEffect(() => {
         const searchTerm = new URLSearchParams(location.search).get('term');
         if (searchTerm) {
-            fetch(`http://localhost:8080/search?term=${encodeURIComponent(searchTerm)}`)
+            fetch(`${url}/search?term=${encodeURIComponent(searchTerm)}`, {
+                headers: new Headers({
+                  "ngrok-skip-browser-warning": "69420",
+                }),
+              })
                 .then(response => response.json())
                 .then(json => {
                     setSearchResults(json);

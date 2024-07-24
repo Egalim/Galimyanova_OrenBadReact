@@ -38,7 +38,7 @@ app.get('/products/:id/pharm', productController.getProductPharm);
 app.get('/products/:productId/:pharmId/quantity', productController.getProductPharmQuantity);
 app.get('/search', productController.Search);
 
-
+ 
 app.post('/reg', reg)
 app.post('/auth', auth)
 

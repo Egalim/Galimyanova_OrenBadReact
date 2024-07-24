@@ -19,6 +19,7 @@ export default function Cart({ drop_product, id, image, title, name_maker, pharm
     fetch(`${url}/update_quantity`, {
       method: "POST",
       headers: {
+        "ngrok-skip-browser-warning": "69420",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -36,7 +37,11 @@ export default function Cart({ drop_product, id, image, title, name_maker, pharm
 
   useEffect(() => {
     if (id) {
-      fetch(`${url}/products/${id}/${pharmid}/quantity`)
+      fetch(`${url}/products/${id}/${pharmid}/quantity`,{
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+      })
         .then(response => response.json())
         .then(data => {
           setQuantity(data);

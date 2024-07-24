@@ -34,6 +34,9 @@ const AddProduct = () => {
             formData.append('makerid', makerid);
 
             const response = await fetch(`${url}/newproduct`, {
+                headers: new Headers({
+                    "ngrok-skip-browser-warning": "69420",
+                  }),
                 method: 'POST',
                 body: formData,
             });

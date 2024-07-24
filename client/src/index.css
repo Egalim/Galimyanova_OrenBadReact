@@ -147,9 +147,21 @@ h4{
     padding: 15px 45px;
 }
 
+.my_button1 {
+  border-radius: 12px;
+  background: #7ECA9C;
+  padding: 15px 100px;
+} 
 .my_button:hover {
     background: #878A92;
     transition: 0.8s;
     color: #F5F7F7;
     cursor: pointer;
+}
+
+@media (max-width: 610px) {
+  .my_button1 {
+    padding: 10px 50px;
+    text-align: center;
+  }
 }

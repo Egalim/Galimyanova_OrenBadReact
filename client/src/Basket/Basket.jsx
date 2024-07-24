@@ -24,7 +24,13 @@ const Basket = () => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    fetch(`${url}/profile/${id}`)
+    fetch(`${url}/profile/${id}`, 
+      {
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+      }
+    )
       .then(response => response.json())
       .then(data => {
         setProfile(data); 
@@ -62,6 +68,7 @@ const Basket = () => {
       method: "POST",
       mode: "cors",
       headers: {
+        "ngrok-skip-browser-warning": "69420",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -90,6 +97,7 @@ const Basket = () => {
       method: "POST",
       mode: "cors",
       headers: {
+        "ngrok-skip-browser-warning": "69420",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -115,6 +123,7 @@ const Basket = () => {
       const response = await fetch(`${url}/order`, {
         method: 'POST',
         headers: {
+          "ngrok-skip-browser-warning": "69420",
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -230,7 +239,7 @@ const Basket = () => {
                   <h3 className='lettering_semi_bold txt_white'>{array[0]?.pharm_name}</h3>
                 </div>
                 <p className='txt_white' style={{marginTop:'10px', marginBottom:"5vh"}}>С момента оформления заказа товар хранится в атечном пункте 7 дней</p>
-            <button className='my_button' style={{padding: '15px 100px'}} onClick={handleOrderSubmit}> <h3 className='lettering_semi_bold'>Оформить заказ</h3></button>
+            <button className='my_button1'onClick={handleOrderSubmit}> <h3 className='lettering_semi_bold'>Оформить заказ</h3></button>
             </form>
           </div>
         </div>

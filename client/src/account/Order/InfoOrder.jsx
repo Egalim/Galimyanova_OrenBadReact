@@ -14,7 +14,11 @@ export default function InfoOrder() {
   const [OrderInfo, setOrderInfo] = useState([]);
 
   useEffect(() => {
-    fetch(`${url}/getUserOrders/userOrder/${id}`)
+    fetch(`${url}/getUserOrders/userOrder/${id}`, {
+      headers: new Headers({
+        "ngrok-skip-browser-warning": "69420",
+      }),
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

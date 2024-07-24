@@ -7,6 +7,7 @@ import SideNav from '../components/SideNav/SideNav';
 import Navigate from '../components/navigation/Navigate';
 import FormSearch from '../components/FormSearch/FormSearch';
 import Footer from '../components/Footer/Footer';
+import url from '../config';
 
 export default function CardCat() {
     const location = useLocation();
@@ -16,7 +17,11 @@ export default function CardCat() {
     const { categoryId } = useParams();
 
     useEffect(() => {
-        fetch(`http://localhost:8080/category/${categoryId}`)
+        fetch(`${url}/category/${categoryId}`, {
+            headers: new Headers({
+              "ngrok-skip-browser-warning": "69420",
+            }),
+          })
             .then(response => response.json())
             .then(data => {
                 setProducts(data); // Обновите состояние продуктов

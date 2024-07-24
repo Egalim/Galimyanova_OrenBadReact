@@ -13,7 +13,11 @@ export default function Account() {
   const id = useSelector((state) => state.auth.id)
   const [profile, setprofile] = useState('')
   useEffect(() => {
-    fetch(`${url}/profile/${id}`)
+    fetch(`${url}/profile/${id}`, {
+      headers: new Headers({
+        "ngrok-skip-browser-warning": "69420",
+      }),
+    })
       .then(response => response.json())
       .then(data => {
         setprofile(data); // Обновите состояние продуктов
@@ -28,6 +32,7 @@ export default function Account() {
     fetch(`${url}/getUserOrders/${id}`, {
         method: 'GET',
         headers: {
+          "ngrok-skip-browser-warning": "69420",
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}` // Передаем токен авторизации в заголовке
         }

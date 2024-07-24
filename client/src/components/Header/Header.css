@@ -136,4 +136,9 @@
   .hamburger-menu {
     display: block; /* Show hamburger icon */
   }
+
+  .dropdown-menu {
+    left: -70px;
+  }
+  
 }

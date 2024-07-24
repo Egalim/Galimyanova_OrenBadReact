@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import './Card.css'
 import { Link } from 'react-router-dom'
 import Navigate from '../../components/navigation/Navigate'
+import url from '../../config'
 
 export default function Card({ img, nameProduct, maker, price}) {
 
@@ -9,7 +10,7 @@ export default function Card({ img, nameProduct, maker, price}) {
       <div class="product_card">
         
 
-        <img src={`http://localhost:8080/` + `${img}`} alt="product" />
+        <img src={`${url}/` + `${img}`} alt="product" />
         <div class="row_card_product">
           <div class="name_product">
             <h3 class="lettering_semi_bold texturl">

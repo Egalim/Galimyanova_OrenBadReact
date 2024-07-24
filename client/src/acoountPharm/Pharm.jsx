@@ -16,7 +16,11 @@ const Pharm = () => {
 
     async function Submits(e, params) {
         try {
-            const response = await fetch(`${url}/success/${params[1]}/${params[0]}`);
+            const response = await fetch(`${url}/success/${params[1]}/${params[0]}`, {
+                headers: new Headers({
+                  "ngrok-skip-browser-warning": "69420",
+                }),
+              });
             const data = await response.json();
             console.log(data);
             location.reload();
@@ -28,7 +32,11 @@ const Pharm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${url}/pharm/${id}`);
+                const response = await fetch(`${url}/pharm/${id}`, {
+                    headers: new Headers({
+                      "ngrok-skip-browser-warning": "69420",
+                    }),
+                  });
                 const data = await response.json();
                 console.log(data);
                 setPharm(data.data);
