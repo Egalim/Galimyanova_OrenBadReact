@@ -19,7 +19,7 @@
 - управление состоянием - Redux Toolkit, React-Redux;
 - Верстка - HTML5, CSS3, адаптивная/кроссбраузерная верстка, CSS-модули;
 - AJAX запросы – Axios, Fetch API.
-- 
+  
 ***Backend:***
 - Node.js - Express.js, REST API;
 - Аутентификация - JWT, bcrypt;
